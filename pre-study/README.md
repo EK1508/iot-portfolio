@@ -30,7 +30,9 @@ Ich würde gern eine Pflanzenüberwachung bauen, die die Bodenfeuchtigkeit misst
 
 **Wer würde sie nutzen, und welche Geräte müssten miteinander kommunizieren?**
 
-Die Anwendung wäre beispielsweise für Studierende im Wohnheim oder Menschen mit Zimmerpflanzen hilfreich. Ein Bodenfeuchtigkeitssensor würde seine Messwerte an einen kleinen Computer wie den ESP32 liefern. Dieser würde die Werte über WLAN und MQTT an eine Anzeige auf dem Laptop oder einem Display senden. Für eine automatische Bewässerung könnte zusätzlich eine steuerbare Wasserpumpe eingebunden werden.
+Die Anwendung wäre beispielsweise für Studierende im Wohnheim oder Menschen mit Zimmerpflanzen hilfreich. Ein Bodenfeuchtigkeitssensor würde seine Messwerte an einen kleinen Computer wie den ESP32 liefern. Dieser würde die Werte über WLAN an einen MQTT-Broker veröffentlichen. Eine Anzeige auf dem Laptop oder einem Display würde die passenden Topics abonnieren und die Messwerte vom Broker empfangen. Für eine automatische Bewässerung könnte zusätzlich eine steuerbare Wasserpumpe eingebunden werden.
+
+Im Sinne von Local First könnte der Broker im lokalen Netz laufen. So wären Anzeige und Bewässerung auch ohne Internetverbindung möglich, solange das lokale Netz und die beteiligten Geräte funktionieren. Diese Architektur ist eine Projektidee; im Vorbereitungstest wurde dagegen ein öffentlicher Broker verwendet.
 
 ## 3. Netzwerkgrundlagen – Schritt B
 
@@ -119,7 +121,7 @@ Merksatz: Schicht 1 transportiert Bits, Schicht 2 übernimmt den lokalen Verbind
 Grundlage: bereitgestelltes Transkript, mit ergänzenden Präzisierungen.
 
 - **Schicht 4 (Transport)** unterscheidet Datenströme und ordnet eingehende Daten den passenden Anwendungen beziehungsweise Sockets zu. TCP und UDP verwenden dafür Quell- und Zielports.
-- **Ports** sind logische Nummern, keine Kabelanschlüsse. Sie reichen von 0 bis 65535; Port 0 ist für reguläre Dienste reserviert. TCP und UDP haben getrennte Portnummernräume.
+- **Ports** sind logische Nummern, keine Kabelanschlüsse. Sie reichen von 0 bis 65535; Port 0 ist reserviert und wird nicht als regulärer Dienstport verwendet. TCP und UDP haben getrennte Portnummernräume. Siehe [RFC 6335](https://www.rfc-editor.org/rfc/rfc6335.html).
 - Eine TCP-Verbindung wird durch Transportprotokoll, Quell-IP, Quellport, Ziel-IP und Zielport unterschieden. Eine Portnummer allein identifiziert nicht weltweit ein bestimmtes Programm.
 - Server lauschen häufig auf bekannten Ports. Clients bekommen üblicherweise einen vorübergehenden Quellport vom Betriebssystem. In der Antwort tauschen Quelle und Ziel ihre Rollen.
 - **TCP** bietet einen geordneten, zuverlässigen Bytestrom, unter anderem durch Bestätigungen und erneute Übertragung verlorener Daten. Bei dauerhaftem Ausfall kann auch eine TCP-Verbindung scheitern.
@@ -172,6 +174,8 @@ Zwei Geräte dürfen im selben lokalen Subnetz nicht dieselbe IP-Adresse haben, 
 Warum wird praktisch häufig mit dem TCP/IP-Modell mit vier Schichten gearbeitet? Wo sind starre Grenzen des OSI-Modells mit sieben Schichten für IoT unpraktisch? Welche Rolle spielen kleine Sensornachrichten und zusätzliche Protokollheader?
 
 Das TCP/IP-Modell mit vier Schichten passt gut zur praktischen Arbeit mit Internetprotokollen. Das OSI-Modell mit sieben Schichten hilft beim Verständnis, aber seine Grenzen lassen sich in realen Geräten und Anwendungen nicht immer streng trennen.
+
+Beispielsweise übernimmt ein Router die Weiterleitung anhand von IP-Adressen auf Schicht 3. Eine Firewall auf demselben Gerät kann zusätzlich Transportports aus Schicht 4 prüfen. Die Aufgaben der OSI-Schichten 5 bis 7 sind in realen Anwendungen oft eng verbunden und werden im TCP/IP-Modell gemeinsam als Anwendungsschicht betrachtet.
 
 Bei kleinen Sensordaten können die zusätzlichen Protokollheader im Verhältnis zum Messwert viel Aufwand verursachen. Ihre Übertragung braucht Zeit und Energie. Deshalb ist wichtig, passende Protokolle auszuwählen, damit das System zuverlässig und energiesparend funktioniert. Der Aufwand entsteht durch die verwendeten Protokolle, nicht durch das Schichtenmodell selbst.
 
@@ -255,6 +259,8 @@ Die drei Zeitwerte je Zeile sind die Hin- und Rücklaufzeiten dreier Testpakete 
 | QoS | `0` für Veröffentlichung und Abonnement |
 | Retain | Ausgeschaltet |
 | Anmeldung | Ohne Benutzername und Passwort am öffentlichen Testbroker |
+
+Abweichung vom Beispiel im Guide: Statt unverschlüsselter WebSockets auf Port 8000 wurde die verschlüsselte Variante auf Port 8884 verwendet. Broker, Topic-Abonnement, Veröffentlichung und Empfang entsprechen derselben MQTT-Aufgabe. Ein [offizielles HiveMQ-Beispiel](https://github.com/hivemq/hivemq-mqtt-client-dotnet/blob/main/README.md) verwendet dafür ebenfalls `wss://broker.hivemq.com:8884/mqtt`.
 
 Veröffentlichte und empfangene Nachricht:
 
