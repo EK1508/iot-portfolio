@@ -2,7 +2,7 @@
 
 Beginn: 15.10.2026
 
-Status: In Bearbeitung
+Status: Vorbereitung abgeschlossen
 
 ## 1. Portfolio einrichten
 
@@ -38,15 +38,19 @@ Quelle: [How Data Moves Through the Internet – Ed Harmoush](https://www.practi
 
 Pflichtlektionen:
 
-- [ ] 1a: Hosts, IP Addresses, Networks.
-- [ ] 1b: Repeaters, Hubs, Bridges, Switches, Routers.
-- [ ] 2a: OSI Model – Layers 1, 2, 3.
+- [x] 1a: Hosts, IP Addresses, Networks – angesehen.
+- [x] 1b: Repeaters, Hubs, Bridges, Switches, Routers – angesehen.
+- [x] 2a: OSI Model – Layers 1, 2, 3 – angesehen.
 
-Zusätzlich empfohlen: 2b sowie 3a und 3b.
+Zusätzlich empfohlene Lektionen:
+
+- [x] 2b: OSI Model – Layers 4–7 und Kapselung – angesehen.
+- [x] 3a: Kommunikation im selben Netzwerk – angesehen.
+- [x] 3b: Kommunikation in ein anderes Netzwerk – angesehen.
 
 ### Notizen zu Lektion 1a: Hosts, IP-Adressen und Netzwerke
 
-Grundlage: bereitgestelltes Transkript. Die folgenden Notizen fassen die Inhalte zusammen; die Video-Checkliste oben bleibt separat.
+Grundlage: angesehenes Video und bereitgestelltes Transkript. Die folgenden Notizen fassen die Inhalte zusammen.
 
 - Ein **Host** ist ein Gerät, das Daten sendet oder empfängt, beispielsweise ein Laptop, Smartphone oder vernetztes IoT-Gerät.
 - **Client und Server sind Rollen innerhalb einer Kommunikation:** Der Client stellt eine Anfrage, der Server beantwortet sie. Derselbe Computer kann in unterschiedlichen Verbindungen beide Rollen übernehmen.
@@ -297,6 +301,8 @@ Ich möchte noch üben, die Netzwerkuntersuchung selbstständig durchzuführen. 
 - [x] Terminalbelege zur Netzwerkuntersuchung ergänzt.
 - [x] MQTT-Screenshot ergänzt.
 - [x] Ergebnisse committet und zu GitHub gepusht.
-- [ ] Laptop mit WLAN und SSH-Client bereit; Wireshark und MQTTX optional.
+- [x] Laptop mit WLAN und installiertem SSH-Client bereit.
+
+Optional: Wireshark und MQTTX installieren. Für den MQTT-Versuch wurde der Webclient verwendet; diese Installationen sind für den Abschluss der Vorbereitung nicht erforderlich.
 
 Modul 0 ist verpflichtend, zählt einen Modulpunkt und wird in der zweiten Sitzung bewertet.
