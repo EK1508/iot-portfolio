@@ -1,10 +1,12 @@
-# Modul 0 – Vorbereitung: Vernetzung und IoT-Lösungen
+# Module 0 – Pre-Study
 
 Beginn: 15.10.2026
 
 Status: Vorbereitung abgeschlossen
 
-## 1. Portfolio einrichten
+Vorbereitung auf das Modul „Vernetzung und IoT-Lösungen“: persönliches Portfolio einrichten, eine IoT-Idee entwickeln, Netzwerkgrundlagen erarbeiten und das eigene Netzwerk sowie MQTT praktisch untersuchen. Die Aufgaben und Leitfragen folgen dem Pre-Study Guide.
+
+## Task Portfolio einrichten
 
 - [x] Persönliches GitHub-Repository aus der Kursvorlage erstellt.
 - [x] Repository auf den Laptop geklont.
@@ -12,7 +14,7 @@ Status: Vorbereitung abgeschlossen
 - [x] Vorbereitung bearbeitet und Ergebnisse dokumentiert.
 - [x] Notizen und Belege mit Git gespeichert und zu GitHub hochgeladen.
 
-## 2. Inspiration – Schritt A
+## Task Inspirations – Schritt A
 
 Video: [Teaching the IoTempower Way](https://video.iotempower.us/)
 
@@ -34,7 +36,7 @@ Die Anwendung wäre beispielsweise für Studierende im Wohnheim oder Menschen mi
 
 Im Sinne von Local First könnte der Broker im lokalen Netz laufen. So wären Anzeige und Bewässerung auch ohne Internetverbindung möglich, solange das lokale Netz und die beteiligten Geräte funktionieren. Diese Architektur ist eine Projektidee; im Vorbereitungstest wurde dagegen ein öffentlicher Broker verwendet.
 
-## 3. Netzwerkgrundlagen – Schritt B
+## Task Netzwerkgrundlagen – Schritt B
 
 Quelle: [How Data Moves Through the Internet – Ed Harmoush](https://www.practicalnetworking.net/index/networking-fundamentals-how-data-moves-through-the-internet/)
 
@@ -179,9 +181,9 @@ Beispielsweise übernimmt ein Router die Weiterleitung anhand von IP-Adressen au
 
 Bei kleinen Sensordaten können die zusätzlichen Protokollheader im Verhältnis zum Messwert viel Aufwand verursachen. Ihre Übertragung braucht Zeit und Energie. Deshalb ist wichtig, passende Protokolle auszuwählen, damit das System zuverlässig und energiesparend funktioniert. Der Aufwand entsteht durch die verwendeten Protokolle, nicht durch das Schichtenmodell selbst.
 
-## 4. Mein Netzwerk untersuchen – Schritt C
+## Task Netzwerkuntersuchung – Schritt C
 
-### 4.1 IP-Adresse und Standardgateway
+### IP-Adresse und Standardgateway
 
 Unter Windows: `ipconfig /all` und `route print`.
 
@@ -213,7 +215,7 @@ Netzwerkziel   Netzwerkmaske    Gateway        Schnittstelle  Metrik
 
 Die Adresse `192.168.2.31/24` gehört zum lokalen Subnetz `192.168.2.0/24`. Die Standardroute `0.0.0.0/0` verweist auf `192.168.2.1`. Für Ziele ohne spezifischere Route verwendet mein Laptop dieses Gateway. Die IPv4-Adresse wird per DHCP bezogen; der DHCP-Server hat hier dieselbe Adresse wie das Gateway. Weitere angezeigte Adapter waren getrennt und wurden deshalb nicht für diese Auswertung verwendet.
 
-### 4.2 Weg zu 1.1.1.1
+### Weg zu 1.1.1.1
 
 Befehl unter Windows: `tracert 1.1.1.1`.
 
@@ -241,7 +243,7 @@ Ablaufverfolgung beendet.
 
 Die drei Zeitwerte je Zeile sind die Hin- und Rücklaufzeiten dreier Testpakete bis zur jeweiligen Station. Sie sind keine Laufzeiten nur zwischen zwei benachbarten Stationen. Die Messung zeigt den zu diesem Zeitpunkt sichtbaren Pfad; spätere Messungen können anders ausfallen.
 
-### 4.3 MQTT ausprobieren
+## Task MQTT – Schritt C
 
 - [x] MQTT-Client ausgewählt und mit dem Testbroker verbunden.
 - [x] Ein eigenes Topic mit Pseudonym oder Zufallskennung abonniert.
@@ -282,6 +284,8 @@ Die Sensoren müssen nur den Broker kennen. Wenn ein neues Display dazukommt, ab
 
 Der Broker verteilt die Messwerte an alle interessierten Displays. Dadurch müssen die Sensoren keine eigenen Verbindungen zu jedem einzelnen Display verwalten. Das macht das System leichter erweiterbar und wartbar. Sensoren und Displays sind dadurch entkoppelt.
 
+## Task Netzwerkgrenzen
+
 ### Leitfrage 5: Grenzen zwischen Netzwerken
 
 Kann mein Laptop von zu Hause direkt ein Gerät im Heim-WLAN eines Kommilitonen anpingen? Warum beziehungsweise warum nicht? Was würde ein Overlay-Netzwerk wie Nebula oder Yggdrasil verändern?
@@ -290,17 +294,7 @@ Normalerweise kann ich das Gerät nicht direkt anpingen, weil seine private IP-A
 
 Ein Overlay wie Nebula oder Yggdrasil verbindet unsere Geräte über ein virtuelles, verschlüsseltes Netzwerk mit eigenen Adressen. Darüber können wir die Geräte gezielt erreichen, wenn sie selbst am Overlay teilnehmen oder über ein eingerichtetes Gateway angebunden sind. Die Firewall muss den jeweiligen Zugriff, beispielsweise Ping, ebenfalls erlauben.
 
-## 5. Rückblick und offene Fragen
-
-Ich habe gelernt, wie Geräte innerhalb eines Netzwerks und über Router miteinander kommunizieren. Außerdem kann ich IP-Adressen, MAC-Adressen und Ports besser unterscheiden. Am Beispiel der Pflanzenüberwachung konnte ich die Begriffe mit einer konkreten Anwendung verbinden.
-
-Die vielen neuen Begriffe und die Zuordnung zu den Schichten waren zunächst ungewohnt. Die schrittweisen Erklärungen und Beispiele haben mir beim Verständnis geholfen.
-
-Bei der praktischen Netzwerkuntersuchung wurden die IP-Adresse, Subnetzmaske und das Gateway meines Laptops ermittelt. Anschließend konnte ich im MQTT-Webclient ein Topic abonnieren, eine Nachricht veröffentlichen und sie wieder empfangen.
-
-Ich möchte noch üben, die Netzwerkuntersuchung selbstständig durchzuführen. Außerdem interessiert mich, wie ein echter Sensor seine Messwerte über MQTT an eine Anzeige sendet.
-
-## 6. Vor der ersten Sitzung prüfen
+## Abschlusscheckliste – Vor der ersten Sitzung
 
 - [x] Fünf Leitfragen beantwortet.
 - [x] Video- und Inspirationsnotizen ergänzt.
@@ -312,3 +306,7 @@ Ich möchte noch üben, die Netzwerkuntersuchung selbstständig durchzuführen. 
 Optional: Wireshark und MQTTX installieren. Für den MQTT-Versuch wurde der Webclient verwendet; diese Installationen sind für den Abschluss der Vorbereitung nicht erforderlich.
 
 Modul 0 ist verpflichtend, zählt einen Modulpunkt und wird in der zweiten Sitzung bewertet.
+
+## Reflection 0
+
+[Reflection 0 – Rückblick und offene Fragen](../Reflections/ref00.md)
