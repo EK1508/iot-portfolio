@@ -57,6 +57,7 @@ My personal profile and expectations, you can find [here](Module01/README.md#tas
 
 ## Table of Contents
 
+- [Module 0: Pre-Study / Vorbereitung](pre-study/README.md)
 - [Module 1: IoT Introduction](Module01/README.md), 
   [Reflection 1](Reflections/ref01.md)
 - [Module 2: Hardware and Basic Electronics](Module02/README.md),
